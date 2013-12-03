@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserGUI implements ActionListener{
 	// DB Accessor
 	AccessCourseData DBClassAccessor = new AccessCourseData();
-	ModifyCourseData DBClassModifier = new ModifyCourseData();
+	AccessStudentData DBStudentAccessor;
 	
 	JTextArea reportTextArea;
 	
@@ -30,6 +30,8 @@ public class UserGUI implements ActionListener{
 		myUsername = username;
 		myMajor = major;
 		myMinor = minor;
+		
+		DBStudentAccessor = new AccessStudentData(myUsername);
 		
 		// Get Major from Student DB
 	
@@ -146,10 +148,10 @@ public class UserGUI implements ActionListener{
 		classRequirementsField.setText("");
 		
 		majorList.removeAllItems();
-		majorList.addItem("");
+		majorList.addItem(myMajor);
 		
 		minorList.removeAllItems();
-		minorList.addItem("Select Minor");
+		minorList.addItem(myMinor);
 	}
 	
 	public static void main(String[] args){
@@ -157,6 +159,96 @@ public class UserGUI implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent ae){
-		
+		// Generate User Report
+		if(ae.getSource() == jbGenReport){
+			ArrayList<String> usersClasses = DBStudentAccessor.getClassIDs();
+			ArrayList<ArrayList> usersMajorRequirements = DBClassAccessor.getMajorRequirements(myMajor);
+			ArrayList<String> usersMinorRequirements = DBClassAccessor.getMinorRequirements(myMinor);
+			
+			ArrayList<ArrayList> classesMajStillNeeded = new ArrayList<ArrayList>();
+			ArrayList<String> classesMinStillNeeded = new ArrayList<String>();
+			
+			for(ArrayList<String> tempAL : usersMajorRequirements){
+				if(usersClasses.contains(tempAL.get(0))){
+					
+				}else{
+					ArrayList<String> tempAL2 = new ArrayList<String>();
+					tempAL2.add(tempAL.get(0));
+					tempAL2.add(tempAL.get(1));
+					
+					classesMajStillNeeded.add(tempAL2);
+				}
+			}
+			
+			for(String tempString : classesMinStillNeeded){
+				if(usersClasses.contains(tempString)){
+					
+				}else{
+					classesMinStillNeeded.add(tempString);
+				}
+			}
+			
+			// classesMinStillNeeded (String array of Minor classes still needed)
+			// classesMajStillNeeded (ArrayList array of Major classes still needed)
+			
+			for(ArrayList<String> tempAL : classesMajStillNeeded){
+				System.out.println(tempAL.get(0) + "\t(" + tempAL.get(1) + ")");
+			}
+			
+			// ---------------------------------------------------------------------------
+			
+			String majorReportString = "---------------------------------------------------------------------------";
+				majorReportString = majorReportString + "\nMAJOR: " + majorList.getSelectedItem().toString() + "\n";
+				majorReportString = majorReportString + "---------------------------------------------------------------------------";
+				int count = 1;
+				int previousVal = 0;
+				
+				for(ArrayList<String> tempAL : classesMajStillNeeded){
+					try{
+						if(Integer.parseInt(tempAL.get(1)) > previousVal){	
+							// Output line
+							majorReportString = majorReportString + "\n-----------------------------Semester " + tempAL.get(1) + " -----------------------------";
+							previousVal = Integer.parseInt(tempAL.get(1));
+							
+							if(count % 2 == 0){
+								count--;
+							}
+						}
+					}catch(NumberFormatException nfe){
+						// If no semesters, this will be thrown - ignore
+					}
+					
+					if(count % 2 == 0){
+						majorReportString = majorReportString + "\t" + tempAL.get(0) + "\t(" + tempAL.get(1) + ")";
+					}else{
+						majorReportString = majorReportString + "\n" + tempAL.get(0) + "\t(" + tempAL.get(1) + ")";
+					}
+					count++;
+					
+				}
+				
+
+
+				if(!((minorList.getSelectedItem().toString()).equals("Select Minor"))){
+					majorReportString = majorReportString + "\n---------------------------------------------------------------------------";
+					majorReportString = majorReportString + "\nMINOR: " + minorList.getSelectedItem().toString();
+					majorReportString = majorReportString + "\n---------------------------------------------------------------------------";
+					
+					// Append to reportTextArea
+					
+					count = 1;
+					
+					for(String tempS : classesMinStillNeeded){
+						if(count % 2 == 0){
+							majorReportString = majorReportString + "\t" + tempS + "\t";
+						}else{
+							majorReportString = majorReportString + "\n" + tempS + "\t";
+						}
+						count++;
+					}
+				}
+				
+				reportTextArea.setText(majorReportString);
+		}
 	}
 }

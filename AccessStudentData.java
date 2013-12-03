@@ -26,6 +26,10 @@ public class AccessStudentData{
 		
 	}
 	
+	public AccessStudentData(String myUsername){
+		username = myUsername;
+	}
+	
 	public boolean configureUser(String inputCredendials){
 		String userQuery = "SELECT StudentID FROM Students";
 		ResultSet rs = executeQuery(userQuery);
@@ -95,6 +99,7 @@ public class AccessStudentData{
 		ArrayList<String> classIDs = new ArrayList<String>();
 		
 		try{
+			rs.next();
 			String unparsedClassIDs = rs.getString(1);
 			
 			// Parse the classIDs (CSV)
