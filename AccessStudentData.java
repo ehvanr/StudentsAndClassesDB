@@ -76,6 +76,12 @@ public class AccessStudentData{
 			String unparsedClassIDs = rs.getString(1);
 			
 			// Parse the classIDs (CSV)
+			String[] splitParsed = unparsedClassIDs.split(",");
+			
+			for(String tempS : splitParsed){
+				tempS = tempS.trim();
+				classIDs.add(tempS);
+			}
 			
 			connection.close();
 		}catch(SQLException sqle){
