@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class StartProgram extends JFrame implements ActionListener, CommonData{
+public class StartProgram extends JFrame implements ActionListener{
    JButton jbSubmit;
    JTextField jtfUsername;
+   String major;
+   String minor;
 
    public static void main( String [] args ){
       StartProgram newProgram = new StartProgram();
@@ -32,26 +34,34 @@ public class StartProgram extends JFrame implements ActionListener, CommonData{
       add(jpSouth, BorderLayout.SOUTH);
       
       jbSubmit.addActionListener( this );
-   }
-   public boolean isValid( String user ){
-      for(int i=0; i<USERNAMES.length; i++){
-         if( user.equals( USERNAMES[i] ) ) 
-            return true;
-      }
-      return false;
-   }
+    }
+	
+	public boolean isValid( String user ){
+		// Pull User from DB
+		AccessStudentData tempStudentAccessor = new AccessStudentData();
+	  
+		if(tempStudentAccessor.configureUser(user)){
+			major = tempStudentAccessor.getMajorID();
+			minor = tempStudentAccessor.getMinorID();
+			return true;
+		}else{
+			return false;
+		}
+	}
    
    public void actionPerformed(ActionEvent ae){
       if(ae.getActionCommand().equals("Submit")){
+	  
          String username = jtfUsername.getText();
+		 
          if( username.equalsIgnoreCase("guest") ){
-            ProgUI newGuest = new ProgUI();
+            GuestGUI newGuest = new GuestGUI();
             // close this window
          }else if( username.equalsIgnoreCase("admin") ){
-            AdminUI newAdmin = new AdminUI();
+            AdminGUI newAdmin = new AdminGUI();
             // close this window
          }else if( isValid( username ) == true ){
-            UserUI newUser = new UserUI( username );
+            UserGUI newUser = new UserGUI(username, major, minor);
             // close this window
          }else{
             JOptionPane.showMessageDialog(null, "Invalid username, try again.");

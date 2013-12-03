@@ -179,7 +179,7 @@ public class AccessCourseData{
 			while(rs.next()){
 				ArrayList<String> tempAL = new ArrayList<String>();
 				String ClassID = rs.getString(1);
-				String Semester = rs.getString(2);
+				String Semester = rs.getInt(2) + "";
 				
 				tempAL.add(ClassID);
 				tempAL.add(Semester);

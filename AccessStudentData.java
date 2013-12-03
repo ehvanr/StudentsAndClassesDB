@@ -21,11 +21,33 @@ public class AccessStudentData{
 	
 	/**
 	 * AccessStudentData Constructor
-	 * 
-	 * @param String username
 	 **/
-	public AccessStudentData(String username){
-		this.username = username;
+	public AccessStudentData(){
+		
+	}
+	
+	public boolean configureUser(String inputCredendials){
+		String userQuery = "SELECT StudentID FROM Students";
+		ResultSet rs = executeQuery(userQuery);
+		
+		ArrayList<String> allUsersAL = new ArrayList<String>();
+		try{
+			while(rs.next()){
+				String tempUser = rs.getString(1);
+				allUsersAL.add(tempUser);
+			}
+			
+			connection.close();
+		}catch(SQLException sqle){
+			
+		}
+		
+		if(allUsersAL.contains(inputCredendials)){
+			username = inputCredendials;
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	/**
@@ -68,7 +90,7 @@ public class AccessStudentData{
 	 * @return String classIDs
 	*/
 	public ArrayList<String> getClassIDs(){
-		String classIDQuery = "SELECT ClassIDs FROM Students WHERE username='" + username + "'";
+		String classIDQuery = "SELECT ClassIDs FROM Students WHERE StudentID='" + username + "'";
 		ResultSet rs = executeQuery(classIDQuery);
 		ArrayList<String> classIDs = new ArrayList<String>();
 		
@@ -100,7 +122,7 @@ public class AccessStudentData{
 	 * @return String majorID
 	 **/
 	public String getMajorID(){
-		String majorIDQuery = "SELECT MajorID FROM Students WHERE username='" + username + "'";
+		String majorIDQuery = "SELECT MajorID FROM Students WHERE StudentID='" + username + "'";
 		ResultSet rs = executeQuery(majorIDQuery);
 		
 		try{
@@ -123,7 +145,7 @@ public class AccessStudentData{
 	 * @return String minorID
 	 **/
 	public String getMinorID(){
-		String minorIDQuery = "SELECT MinorID FROM Students WHERE username='" + username + "'";
+		String minorIDQuery = "SELECT MinorID FROM Students WHERE StudentID='" + username + "'";
 		ResultSet rs = executeQuery(minorIDQuery);
 		
 		try{
