@@ -5,6 +5,10 @@ public class AccessTester{
 		AccessCourseData testerCData = new AccessCourseData();
 		AccessStudentData testerSData = new AccessStudentData("user");
 		
+		// ---------------------------------------
+		// ---------------------- AccessCourseData
+		// ---------------------------------------
+		
 		// Tests getMinorRequirements
 		System.out.println("\ngetMinorRequirements:");
 		ArrayList<String> tempAL = testerCData.getMinorRequirements("NSSA");
@@ -77,11 +81,32 @@ public class AccessTester{
 		System.out.println("\n\ngetClassTotalCredits");
 		System.out.println(testerCData.getClassTotalCredits(tempAL));
 		
-		// Update a value cause YOLO
-		System.out.println("\n\nupdateClassesTable:");
+		// ---------------------------------------
+		// -------------------- ModifyCourseData
+		// ---------------------------------------
 		
-		System.out.println("\nUPDATE Classes SET ClassID='ISTE-331', ClassName='Integration In Informatics', CreditValue='3', Requirements='ISTE-230' WHERE classID='ISTE-371'\n");
+		// Remove Class
 		ModifyCourseData tempModify = new ModifyCourseData();
-		tempModify.updateClassesTable("ISTE-371", "ISTE-331", "Integration In Informatics", "3", "ISTE-230");
+		tempModify.removeClass("ISTE-371");
+		
+		// Add Class
+		tempModify.addClass("ISTE-331", "Integration in Infomativs", "3", "ISTE-230");
+		
+		// Update Class
+		tempModify.updateClassesTable("ISTE-331", "ISTE-371", "Integration In Informatics", "3", "");
+		
+		// ---------------------------------------
+		// --------------------  ModifyStudentData
+		// ---------------------------------------
+		
+		// Remove student
+		ModifyStudentData tempStudModify = new ModifyStudentData();
+		tempStudModify.deleteStudent("exr7549");
+		
+		// Add student
+		tempStudModify.addStudent("exr7549","Evan Reichard","ISTE-120, ISTE-190, ISTE-121, ISTE-140, ISTE-110, MATH-131, MATH-161, ISTE-230, ISTE-260, ISTE-240, STAT-145, STAT-146, ISTE-330, ISTE-430","ISTE", "");
+		
+		// Update student
+		tempStudModify.updateStudent("exr7549", "exr7549","Evan Reichard","ISTE-120, ISTE-190, ISTE-121, ISTE-140, ISTE-110, MATH-131, MATH-161, ISTE-230, ISTE-260, ISTE-240, STAT-145, STAT-146, ISTE-330, ISTE-430","ISTE", "NULL");
 	}
 }

@@ -11,7 +11,7 @@ public class ModifyCourseData{
 		
 	}
 	
-	public boolean updateQuery(String query){
+	private boolean updateQuery(String query){
 		try {
             Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
             String database = "jdbc:odbc:Courses";
@@ -34,7 +34,6 @@ public class ModifyCourseData{
 	public void updateClassesTable(String oldClassID, String newClassID, String className, String creditValue, String requirements){
 		String updateClassesQuery = "UPDATE Classes SET ClassID='" + newClassID + "', ClassName='" + className + "', CreditValue='" + creditValue + "', Requirements='" + requirements + "' WHERE classID='" + oldClassID + "'";
 		
-		
 		if(updateQuery(updateClassesQuery)){
 			// Woo successful
 			System.out.println("Success!");
@@ -43,5 +42,25 @@ public class ModifyCourseData{
 			System.out.println("FAILURE! YOU STINKY!");
 		}
 		
+	}
+	
+	public void removeClass(String classID){
+		String removeClassQuery = "DELETE FROM Classes WHERE ClassID='" + classID + "'";
+		
+		if(updateQuery(removeClassQuery)){
+			// Success
+		}else{
+			// Failure
+		}
+	}
+	
+	public void addClass(String classID, String className, String creditValue, String requirements){
+		String addClassQuery = "INSERT INTO Classes VALUES ('" + classID + "', '" + className + "', '" + creditValue + "', '" + requirements + "')";
+		
+		if(updateQuery(addClassQuery)){
+			// Success
+		}else{
+			// Failure
+		}
 	}
 }
