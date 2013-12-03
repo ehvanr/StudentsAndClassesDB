@@ -66,10 +66,11 @@ public class AccessStudentData{
 	*/
 	public ArrayList<String> getClassIDs(){
 		String classIDQuery = "SELECT ClassIDs FROM Students WHERE username='" + username + "'";
+		ResultSet rs = executeQuery(classIDQuery);
 		ArrayList<String> classIDs = new ArrayList<String>();
 		
 		try{
-			String unparsedClassIDs = rs.getString(1)
+			String unparsedClassIDs = rs.getString(1);
 			
 			// Parse the classIDs (CSV)
 			
