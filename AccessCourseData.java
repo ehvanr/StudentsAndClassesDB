@@ -59,7 +59,6 @@ public class AccessCourseData{
 		
 		try{
 			while(rs.next()){
-				// Still need to split via CSV
 				String ClassID = rs.getString(1);
 				minorRequirements.add(ClassID);
 			}
@@ -91,10 +90,15 @@ public class AccessCourseData{
 		ArrayList<String> classReq = new ArrayList<String>();
 		
 		try{
-			while(rs.next()){
-				// Still need to split via CSV
-				String reqTemp = rs.getString(1);
-				classReq.add(reqTemp);
+			// Advance
+			rs.next();
+			String reqTemp = rs.getString(1);
+			
+			String[] parsedSplitReq = reqTemp.split(",");
+			
+			for(String tempS : parsedSplitReq){
+				tempS = tempS.trim();
+				classReq.add(tempS);
 			}
 			
 			connection.close();
