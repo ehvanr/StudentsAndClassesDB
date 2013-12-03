@@ -31,15 +31,13 @@ public class ModifyCourseData{
 	}
 	
 	// This assumes that requirements have been verified
-	public void updateClassesTable(String oldClassID, String newClassID, String className, String creditValue, String requirements){
-		String updateClassesQuery = "UPDATE Classes SET ClassID='" + newClassID + "', ClassName='" + className + "', CreditValue='" + creditValue + "', Requirements='" + requirements + "' WHERE classID='" + oldClassID + "'";
+	public void updateClassesTable(String classID, String className, String creditValue, String requirements){
+		String updateClassesQuery = "UPDATE Classes SET ClassID='" + classID + "', ClassName='" + className + "', CreditValue='" + creditValue + "', Requirements='" + requirements + "' WHERE classID='" + classID + "'";
 		
 		if(updateQuery(updateClassesQuery)){
 			// Woo successful
-			System.out.println("Success!");
 		}else{
 			// Booo failure
-			System.out.println("FAILURE! YOU STINKY!");
 		}
 		
 	}
