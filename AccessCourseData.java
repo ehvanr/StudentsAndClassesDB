@@ -106,6 +106,16 @@ public class AccessCourseData{
 		return classReq;
 	}
 	
+	/**
+	 * getClassTotalCredits
+	 *
+	 * This takes in an ArrayList of type String of classes and returns 
+	 * the total credits of all classes combined. It just calls the 
+	 * getClassCredit method and sums up everything in an enhanced for loop.
+	 *
+	 * @param 	ArrayList<String> 	classAL
+	 * @return 	Integer				totalVal
+	 **/ 
 	public Integer getClassTotalCredits(ArrayList<String> classAL){
 		int totalVal = 0;
 		for(String myClass : classAL){
@@ -116,6 +126,15 @@ public class AccessCourseData{
 		return totalVal;
 	}
 	
+	/**
+	 * getClassCredit
+	 *
+	 * This takes in a single class name and returns that classes
+	 * credit value.
+	 *
+	 * @param 	String 				myClass
+	 * @return 	Integer				tempCred
+	 **/ 
 	public Integer getClassCredit(String myClass){
 		String classCreditQuery = "SELECT CreditValue from Classes where ClassID='" + myClass + "'";
 		ResultSet rs = executeQuery(classCreditQuery);
