@@ -136,12 +136,13 @@ public class AccessCourseData{
 	 * @return 	Integer				tempCred
 	 **/ 
 	public Integer getClassCredit(String myClass){
-		String classCreditQuery = "SELECT CreditValue from Classes where ClassID='" + myClass + "'";
+		String classCreditQuery = "SELECT CreditValue FROM Classes WHERE ClassID='" + myClass + "'";
 		ResultSet rs = executeQuery(classCreditQuery);
 		
 		int tempCred = 0;
 		
 		try{
+			rs.next();
 			tempCred = rs.getInt(1);
 			connection.close();
 		}catch(SQLException sqle){

@@ -28,6 +28,8 @@ public class AccessTester{
 		ArrayList<ArrayList> tempAL3 = testerCData.getMajorRequirements("ISTE");
 		for(ArrayList tempSubAL : tempAL3){
 			// This is a fixed size, tempSubAL will be of size 2 (0-1)
+			
+			//ClassID, Semester
 			System.out.println(tempSubAL.get(0) + "\t" + tempSubAL.get(1));
 		}
 		
@@ -38,6 +40,8 @@ public class AccessTester{
 		ArrayList<ArrayList> tempAL4 = testerCData.getMajors();
 		for(ArrayList tempSubAL : tempAL4){
 			// This is a fixed size, tempSubAL will be of size 3 (0-2)
+			
+			// MajorID, MajorName, Credits Needed
 			System.out.printf("\n%-7s  %-36s  %-14s", tempSubAL.get(0), tempSubAL.get(1), tempSubAL.get(2));
 		}
 		
@@ -48,6 +52,8 @@ public class AccessTester{
 		ArrayList<ArrayList> tempAL5 = testerCData.getMinors();
 		for(ArrayList tempSubAL : tempAL5){
 			// This is a fixed size, tempSubAL will be of size 3 (0-2)
+			
+			// MinorID, MinorName, Credits Needed
 			System.out.printf("\n%-8s  %-50s  %-14s", tempSubAL.get(0), tempSubAL.get(1), tempSubAL.get(2));
 		}
 		
@@ -58,11 +64,17 @@ public class AccessTester{
 		ArrayList<ArrayList> tempAL6 = testerCData.getClasses();
 		for(ArrayList tempSubAL : tempAL6){
 			// This is a fixed size, tempSubAL will be of size 4 (0-3)
+			
+			// ClassID, ClassName, Credit Value, Requirements
 			System.out.printf("\n%-7s  %-60s  %-14s  %-20s", tempSubAL.get(0), tempSubAL.get(1), tempSubAL.get(2), tempSubAL.get(3));
 		}
 		
 		// Tests getClassCredit
+		System.out.println("\n\ngetClassCredit");
+		System.out.println(testerCData.getClassCredit("BIOL-101"));
 		
 		// Tests getClassTotalCredits
+		System.out.println("\n\ngetClassTotalCredits");
+		System.out.println(testerCData.getClassTotalCredits(tempAL));
 	}
 }
