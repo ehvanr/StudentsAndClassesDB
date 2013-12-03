@@ -11,7 +11,7 @@ public class AccessCourseData{
 	
 	/**
 	 * executeQuery
-	 * 
+	 * <br /><br />
 	 * This method is for opening and executing the query passed along to it. 
 	 * This method does not close the Connection that it opens, it must be closed 
 	 * via the methods that called it. This is because we return the ResultSet. 
@@ -42,11 +42,11 @@ public class AccessCourseData{
 	
 	/**
 	 * getMinorRequirements
-	 *
+	 * <br /><br />
 	 * This method accepts a minor as a parameter, and returns an ArrayList 
 	 * of String of all class requirements. 
-	 *
-	 * 'ClassID'
+	 * <br /><br />
+	 * <b>Columns:</b> 'ClassID'
 	 *
 	 * @param 	String 				minor
 	 * @return 	ArrayList<String> 	minorRequirements
@@ -75,11 +75,11 @@ public class AccessCourseData{
 	
 	/**
 	 * getClassRequirements
-	 *
+	 * <br /><br />
 	 * This method accepts a classID as a parameter and returns an ArrayList 
 	 * of Strings of all classes that are a pre-requisite. 
-	 *
-	 * 'Requirements'
+	 * <br /><br />
+	 * <b>Columns:</b> 'Requirements'
 	 *
 	 * @param 	String 				classID
 	 * @return 	ArrayList<String> 	classReq
@@ -108,11 +108,11 @@ public class AccessCourseData{
 	
 	/**
 	 * getClassTotalCredits
-	 *
+	 * <br /><br />
 	 * This takes in an ArrayList of type String of classes and returns 
 	 * the total credits of all classes combined. It just calls the 
 	 * getClassCredit method and sums up everything in an enhanced for loop.
-	 *
+	 * <br /><br />
 	 * @param 	ArrayList<String> 	classAL
 	 * @return 	Integer				totalVal
 	 **/ 
@@ -128,10 +128,10 @@ public class AccessCourseData{
 	
 	/**
 	 * getClassCredit
-	 *
+	 * <br /><br />
 	 * This takes in a single class name and returns that classes
 	 * credit value.
-	 *
+	 * <br /><br />
 	 * @param 	String 				myClass
 	 * @return 	Integer				tempCred
 	 **/ 
@@ -155,12 +155,12 @@ public class AccessCourseData{
 	
 	/**
 	 * getMajorRequirements
-	 *
+	 * <br /><br />
 	 * This method accepts a major as a parameter and returns an ArrayList of
 	 * ArrayLists of said majors requirements with each "sub" ArrayList holding 
 	 * a ClassID and it's respective Semester.
-	 *
-	 * 'ClassID', 'Semester'
+	 * <br /><br />
+	 * <b>Columns:</b> 'ClassID', 'Semester'
 	 *
 	 * @param 	String 					major
 	 * @return 	ArrayList<ArrayList> 	majorRequirements
@@ -194,12 +194,12 @@ public class AccessCourseData{
 	
 	/**
 	 * getMajors
-	 *
+	 * <br /><br />
 	 * This method returns an ArrayList of ArrayLists of all majors with
 	 * each "sub" ArrayList holding a MajorID, and it's respective MajorName 
 	 * and CreditsNeeded.
-	 *
-	 * 'MajorID', 'MajorName', 'CreditsNeeded'
+	 * <br /><br />
+	 * <b>Columns:</b> 'MajorID', 'MajorName', 'CreditsNeeded'
 	 *
 	 * @return 	ArrayList<ArrayList> 	majors
 	 **/
@@ -234,12 +234,12 @@ public class AccessCourseData{
 	
 	/**
 	 * getMinors
-	 *
+	 * <br /><br />
 	 * This method returns an ArrayList of ArrayLists of all minors with
 	 * each "sub" ArrayList holding a MinorID, and it's respective MinorName 
 	 * and CreditsNeeded.
-	 *
-	 * 'MinorID', 'MinorName', 'CreditsNeeded'
+	 * <br /><br />
+	 * <b>Columns:</b> 'MinorID', 'MinorName', 'CreditsNeeded'
 	 *
 	 * @return 	ArrayList<ArrayList> 	minors
 	 **/
@@ -274,12 +274,12 @@ public class AccessCourseData{
 	
 	/**
 	 * getClasses
-	 *
+	 * <br /><br />
 	 * This method returns an ArrayList of ArrayLists of all classes with
 	 * each "sub" ArrayList holding a ClassID, and it's respective ClassName,
 	 * CreditsValue, and Requirements.
-	 *
-	 * 'ClassID', 'ClassName', 'CreditValue', 'Requirements'
+	 * <br /><br />
+	 * <b>Columns:</b> 'ClassID', 'ClassName', 'CreditValue', 'Requirements'
 	 *
 	 * @return 	ArrayList<ArrayList> 	classes
 	 **/
