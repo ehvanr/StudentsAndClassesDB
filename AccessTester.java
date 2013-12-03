@@ -76,5 +76,12 @@ public class AccessTester{
 		// Tests getClassTotalCredits
 		System.out.println("\n\ngetClassTotalCredits");
 		System.out.println(testerCData.getClassTotalCredits(tempAL));
+		
+		// Update a value cause YOLO
+		System.out.println("\n\nupdateClassesTable:");
+		
+		System.out.println("\nUPDATE Classes SET ClassID='ISTE-331', ClassName='Integration In Informatics', CreditValue='3', Requirements='ISTE-230' WHERE classID='ISTE-371'\n");
+		ModifyCourseData tempModify = new ModifyCourseData();
+		tempModify.updateClassesTable("ISTE-371", "ISTE-331", "Integration In Informatics", "3", "ISTE-230");
 	}
 }
