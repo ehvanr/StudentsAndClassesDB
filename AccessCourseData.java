@@ -170,7 +170,7 @@ public class AccessCourseData{
 	 * @return 	ArrayList<ArrayList> 	majorRequirements
 	 **/
 	public ArrayList<ArrayList> getMajorRequirements(String major){
-		String majReqQuery = "SELECT ClassID, Semester FROM MajorRequirements WHERE MajorID='" + major + "'";
+		String majReqQuery = "SELECT ClassID, Semester FROM MajorRequirements WHERE MajorID='" + major + "' ORDER BY Semester ASC";
 		ResultSet rs = executeQuery(majReqQuery);
 		
 		ArrayList<ArrayList> majorRequirements = new ArrayList<ArrayList>();
