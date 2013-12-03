@@ -93,7 +93,7 @@ public class AccessTester{
 		tempModify.addClass("ISTE-331", "Integration in Infomativs", "3", "ISTE-230");
 		
 		// Update Class
-		tempModify.updateClassesTable("ISTE-331", "ISTE-371", "Integration In Informatics", "3", "");
+		tempModify.updateClassesTable("ISTE-371", "Integration In Informatics", "3", "");
 		
 		// ---------------------------------------
 		// --------------------  ModifyStudentData
