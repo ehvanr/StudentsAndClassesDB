@@ -288,7 +288,7 @@ public class AccessCourseData{
 	 * @return 	ArrayList<ArrayList> 	classes
 	 **/
 	public ArrayList<ArrayList> getClasses(){
-		String classesQuery = "SELECT * FROM Classes";
+		String classesQuery = "SELECT * FROM Classes ORDER BY classID ASC";
 		ResultSet rs = executeQuery(classesQuery);
 		
 		ArrayList<ArrayList> classes = new ArrayList<ArrayList>();
@@ -316,5 +316,42 @@ public class AccessCourseData{
 		}
 		
 		return classes;
+	}
+	
+	/**
+	 * getClass
+	 * <br /><br />
+	 * This method returns an ArrayList of Strings of the classes specified
+	 * in the parameter. 
+	 * <br /><br />
+	 * <b>Columns:</b> 'ClassID', 'ClassName', 'CreditValue', 'Requirements'
+	 *
+	 * @return 	ArrayList<String> 	classes
+	 **/
+	public ArrayList<String> getClass(String myClass){
+		String classesQuery = "SELECT * FROM Classes WHERE ClassID='" + myClass + "'";
+		ResultSet rs = executeQuery(classesQuery);
+		
+		ArrayList<String> myClassAL = new ArrayList<String>();
+		
+		try{
+			rs.next();
+			String ClassID = rs.getString(1);
+			String ClassName = rs.getString(2);
+			String CreditValue = rs.getInt(3) + "";
+			String Requirements = rs.getString(4);
+			
+			myClassAL.add(ClassID);
+			myClassAL.add(ClassName);
+			myClassAL.add(CreditValue);
+			myClassAL.add(Requirements);
+			
+			connection.close();
+		}catch(SQLException sqle){
+			sqle.printStackTrace();
+			System.out.println("Error!");
+		}
+		
+		return myClassAL;
 	}
 }
