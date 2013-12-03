@@ -125,9 +125,11 @@ public class UserGUI implements ActionListener{
 		// Update fields
 		int majorCreditsNeeded = DBClassAccessor.getMajorCredits(myMajor);
 		int minorCreditsNeeded = DBClassAccessor.getMinorCredits(myMinor);
+		int totalCreditsTaken = DBClassAccessor.getClassTotalCredits(DBStudentAccessor.getClassIDs());
 		
 		totalCreditsNeededField.setText((majorCreditsNeeded + minorCreditsNeeded) + "");
-		
+		totalCreditsTakenField.setText(totalCreditsTaken + "");
+		totalCreditsLeftField.setText(((majorCreditsNeeded + minorCreditsNeeded) - totalCreditsTaken) + "");
 		
 		myUserGUI.setVisible(true);
 	}
