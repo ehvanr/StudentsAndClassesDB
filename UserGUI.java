@@ -10,17 +10,14 @@ public class UserGUI implements ActionListener{
 	
 	JTextArea reportTextArea;
 	
-	JTextField classIDField;
-	JTextField classNameField;
-	JTextField classCreditField;
-	JTextField classRequirementsField;
+	JTextField totalCreditsNeededField;
+	JTextField totalCreditsTakenField;
+	JTextField totalCreditsLeftField;
 	
 	JComboBox majorList;
 	JComboBox minorList;
 	
 	JButton jbGenReport;
-	JButton jbUpdateAddClass;
-	JButton jbDeleteClass;
 	
 	String myUsername;
 	String myMajor;
@@ -52,12 +49,9 @@ public class UserGUI implements ActionListener{
 		JPanel classNamePanel = new JPanel(new GridLayout(0,2));
 		JPanel classCreditPanel = new JPanel(new GridLayout(0,2));
 		JPanel classRequirementPanel = new JPanel(new GridLayout(0,2));
-		JPanel classButtonPanel = new JPanel();
 		
 		// Buttons
 		jbGenReport = new JButton("Generate Report");
-		jbUpdateAddClass = new JButton("Update / Add Class");
-		jbDeleteClass = new JButton("Delete Class");
 		
 		// TextArea w/ Scroll
 		reportTextArea = new JTextArea(28, 30);
@@ -78,24 +72,24 @@ public class UserGUI implements ActionListener{
 		minorList.setEnabled(false);
 		
 		// JLabels
-		JLabel classIDLabel = new JLabel("ID:");
-		JLabel classNameLabel = new JLabel("Name:");
-		JLabel classCreditLabel = new JLabel("Credit Value:");
-		JLabel classRequirementsLabel = new JLabel("Requirements:");
+		JLabel totalCreditsNeededLabel = new JLabel("Total Credits Needed:");
+		JLabel totalCreditsTakenLabel = new JLabel("Total Credits Taken:");
+		JLabel totalCreditsLeftLabel = new JLabel("Total Credits Left:");
 		
 		// JTextFields
-		classIDField = new JTextField(15);
-		classNameField = new JTextField(15);
-		classCreditField = new JTextField(15);
-		classRequirementsField = new JTextField(15);
+		totalCreditsNeededField = new JTextField(15);
+		totalCreditsTakenField = new JTextField(15);
+		totalCreditsLeftField = new JTextField(15);
+		
+		totalCreditsNeededField.setEditable(false);
+		totalCreditsTakenField.setEditable(false);
+		totalCreditsLeftField.setEditable(false);
 		
 		// Populate before ActionListener
 		populateComboBoxes();
 		
 		// Action Listener
 		jbGenReport.addActionListener(this);
-		jbUpdateAddClass.addActionListener(this);
-		jbDeleteClass.addActionListener(this);
 		majorList.addActionListener(this);
 		minorList.addActionListener(this);
 		
@@ -107,26 +101,19 @@ public class UserGUI implements ActionListener{
 		
 		// leftTopP.add(classList);
 		//leftTopP.add(Box.createRigidArea(new Dimension(0,200)));
-		classIDPanel.add(classIDLabel);
-		classIDPanel.add(classIDField);
+		classIDPanel.add(totalCreditsNeededLabel);
+		classIDPanel.add(totalCreditsNeededField);
 		
-		classNamePanel.add(classNameLabel);
-		classNamePanel.add(classNameField);
+		classNamePanel.add(totalCreditsTakenLabel);
+		classNamePanel.add(totalCreditsTakenField);
 		
-		classCreditPanel.add(classCreditLabel);
-		classCreditPanel.add(classCreditField);
-		
-		classRequirementPanel.add(classRequirementsLabel);
-		classRequirementPanel.add(classRequirementsField);
-		
-		classButtonPanel.add(jbUpdateAddClass);
-		classButtonPanel.add(jbDeleteClass);
+		classCreditPanel.add(totalCreditsLeftLabel);
+		classCreditPanel.add(totalCreditsLeftField);
 		
 		leftBottomP.add(classIDPanel);
 		leftBottomP.add(classNamePanel);
 		leftBottomP.add(classCreditPanel);
 		leftBottomP.add(classRequirementPanel);
-		leftBottomP.add(classButtonPanel);
 		
 		leftP.add(leftTopP);
 		leftP.add(leftBottomP);
@@ -135,17 +122,19 @@ public class UserGUI implements ActionListener{
 		myUserGUI.add(leftP);
 		myUserGUI.add(rightP);
 		
+		// Update fields
+		int majorCreditsNeeded = DBClassAccessor.getMajorCredits(myMajor);
+		int minorCreditsNeeded = DBClassAccessor.getMinorCredits(myMinor);
+		
+		totalCreditsNeededField.setText((majorCreditsNeeded + minorCreditsNeeded) + "");
+		
+		
 		myUserGUI.setVisible(true);
 	}
 	
 	public void populateComboBoxes(){
 		ArrayList<String> tempMajAL;
 		ArrayList<String> tempMinAL;
-		
-		classIDField.setText("");
-		classNameField.setText("");
-		classCreditField.setText("");
-		classRequirementsField.setText("");
 		
 		majorList.removeAllItems();
 		majorList.addItem(myMajor);
@@ -190,10 +179,6 @@ public class UserGUI implements ActionListener{
 			
 			// classesMinStillNeeded (String array of Minor classes still needed)
 			// classesMajStillNeeded (ArrayList array of Major classes still needed)
-			
-			for(ArrayList<String> tempAL : classesMajStillNeeded){
-				System.out.println(tempAL.get(0) + "\t(" + tempAL.get(1) + ")");
-			}
 			
 			// ---------------------------------------------------------------------------
 			

@@ -354,4 +354,37 @@ public class AccessCourseData{
 		
 		return myClassAL;
 	}
+	
+	public Integer getMajorCredits(String myMajor){
+		String myMajorQuery = "SELECT CreditsNeeded FROM Majors WHERE MajorID = '" + myMajor + "'";
+		ResultSet rs = executeQuery(myMajorQuery);
+		System.out.println(myMajor);
+		int majorCreditsNeeded = 0;
+		
+		try{
+			rs.next();
+			majorCreditsNeeded = rs.getInt(1);
+			connection.close();
+		}catch(SQLException sqle){
+			sqle.printStackTrace();
+		}
+		
+		return majorCreditsNeeded;
+	}
+	
+	public Integer getMinorCredits(String myMinor){
+		String myMinorQuery = "SELECT CreditsNeeded FROM Minors WHERE MinorID = '" + myMinor + "'";
+		ResultSet rs = executeQuery(myMinorQuery);
+		int minorCreditsNeeded = 0;
+		
+		try{
+			rs.next();
+			minorCreditsNeeded = rs.getInt(1);
+			connection.close();
+		}catch(SQLException sqe){
+		
+		}
+		
+		return minorCreditsNeeded;
+	}
 }

@@ -124,6 +124,7 @@ public class GuestGUI implements ActionListener{
 		myGuestGUI.add(leftP);
 		myGuestGUI.add(rightP);
 		
+		
 		myGuestGUI.setVisible(true);
 	}
 	
