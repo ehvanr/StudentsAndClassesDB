@@ -219,8 +219,6 @@ public class AdminGUI implements ActionListener{
 					count++;
 					
 				}
-				
-
 
 				if(!((minorList.getSelectedItem().toString()).equals("Select Minor"))){
 					majorReportString = majorReportString + "\n---------------------------------------------------------------------------";
